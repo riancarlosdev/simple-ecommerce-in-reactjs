@@ -1,0 +1,33 @@
+.cart-item-container {
+  width: 100%;
+  margin-bottom: 15px;
+
+  display: grid;
+  grid-template-columns: 160px 1fr 140px 140px 130px;
+  column-gap: 30px;
+  align-items: center;
+
+  
+  .item-image {
+    width: 160px;
+    height: 160px;
+    background-position: center;
+  }
+
+  .item-details {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 10px 20px;
+  }
+
+  button {
+    cursor: pointer;
+  }
+
+  .name {
+    font-size: 24px;
+  }
+}

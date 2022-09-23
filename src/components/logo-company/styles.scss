@@ -1,0 +1,17 @@
+.logo-link {
+  width: 100%;
+}
+
+.container-logo {
+  max-width: 230px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  h1 {
+    font-size: 22px;
+    margin-left: 10px;
+    color: rgb(54, 54, 54);
+  }
+}
