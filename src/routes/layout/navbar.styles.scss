@@ -24,4 +24,51 @@
       cursor: pointer;
     }
   }
+
+  #container-position-check {
+    display: flex;
+    max-width: 683px;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+
+    .finish {
+      .value {
+        width: 40px;
+      }
+    }
+
+    .item-check {
+      display: flex;
+      width: 100%;
+      align-items: center;
+      margin: 0 5px;
+
+      :first-child {
+        margin-left: 0;
+      }
+      :last-child {
+        margin-right: 0;
+      }
+      div {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        .line {
+          width: 150px;
+          height: 3px;
+          background: #4bb80c;
+        }
+        p {
+          font-weight: 600;
+          width: 109px;
+        }
+        margin-left: 6px;
+      }
+    }
+
+    .item-check:nth-child(2) div p {
+      width: 70px;
+    }
+  }
 }
