@@ -1,6 +1,6 @@
 import React from "react";
 
-import './formInput.styles.scss'
+import "./formInput.styles.scss";
 
 function FormInput({ label, inputOptions }) {
   return (

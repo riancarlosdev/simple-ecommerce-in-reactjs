@@ -18,7 +18,7 @@ export const Layout = () => {
 
   return (
     <>
-      <div className="navigation">
+      <div className="navigation max-layout">
         <LogoCompany />
         {path !== "/checkout" && (
           <>

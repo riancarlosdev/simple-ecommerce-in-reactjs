@@ -5,6 +5,12 @@
   box-sizing: border-box;
 }
 
+.max-layout {
+  max-width: 1600px;
+  width: 100%;
+  margin: 0 auto;
+}
+
 body {
   padding: 20px 40px;
   font-family: 'Open Sans',
