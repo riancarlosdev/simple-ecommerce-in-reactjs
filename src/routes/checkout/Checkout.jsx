@@ -1,5 +1,4 @@
 import React, { useCallback, useContext } from "react";
-import Button from "../../components/button/Button";
 import FormInput from "../../components/form-input/FormInput";
 import { CartContext } from "../../context/cart.context";
 import "./checkout.styles.scss";
@@ -7,8 +6,7 @@ import { BsCart } from "react-icons/bs";
 import { Link } from "react-router-dom";
 
 function Checkout() {
-  const { cartItems, addItemToCart, removeItemToCart, setIsCartOpen } =
-    useContext(CartContext);
+  const { cartItems, setIsCartOpen } = useContext(CartContext);
 
   const handleSubTotal = useCallback(() => {
     let total = 0;
