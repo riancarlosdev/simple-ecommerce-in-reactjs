@@ -1,25 +1,17 @@
-import React from 'react'
-import { useContext } from 'react'
-import ShopItems from './ShopItems'
-import { ProductContext } from '../../context/products.context'
-import './shop.styles.scss'
+import React from "react";
+import { useContext } from "react";
+import ShopItems from "./ShopItems";
+import { ProductContext } from "../../context/products.context";
+import "./shop.styles.scss";
 
-function Shop() {
-
-  const {products} = useContext(ProductContext)
-  console.log('products :', products);
-
-  const shopItems = products.map((item) => {
-    return (
-      <ShopItems key={item.id} item={item}/>
-    )
-  })
+export default function Shop() {
+  const { products } = useContext(ProductContext);
 
   return (
-    <div className='products-container'>
-      {shopItems}
+    <div className="products-container max-layout">
+      {products.map((item) => (
+        <ShopItems key={item.id} item={item} />
+      ))}
     </div>
-  )
+  );
 }
-
-export default Shop

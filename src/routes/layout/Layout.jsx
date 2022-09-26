@@ -5,14 +5,12 @@ import { useLocation } from "react-router-dom";
 
 import CartIcon from "../../components/cart-icon/CartIcon";
 import CartDropDown from "../../components/cart-dropdown/CartDropDown";
-import { UserContext } from "../../context/user.context";
 import { CartContext } from "../../context/cart.context";
 import { LogoCompany } from "../../components/logo-company";
 import { TbCircle1, TbCircle2, TbCircle3 } from "react-icons/tb";
 import { BsCheckCircleFill } from "react-icons/bs";
 
 export const Layout = () => {
-  const { currentUser } = useContext(UserContext);
   const { isCartOpen, setIsCartOpen } = useContext(CartContext);
   const path = useLocation().pathname;
 

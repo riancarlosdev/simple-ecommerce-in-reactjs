@@ -1,14 +1,19 @@
-import React, { useCallback, useContext, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import FormInput from "../../components/form-input/FormInput";
 import { CartContext } from "../../context/cart.context";
 import "./checkout.styles.scss";
 import { BsCart } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { validadeNumberInput } from "../../utils/validateNumberInput";
+import axios from "axios";
+import UF from "./data/UF.json";
+import { riancarlosdev } from "riancarlosdev-validate-credit-card";
 
 function Checkout() {
   const { cartItems, setIsCartOpen } = useContext(CartContext);
   const [postcode, setPostcode] = useState("");
+  const [datapostcode, setDatapostcode] = useState(null);
+  const [isloading, setIsloading] = useState(false);
 
   const handleSubTotal = useCallback(() => {
     let total = 0;
@@ -17,6 +22,34 @@ function Checkout() {
     });
     return total;
   }, [cartItems]);
+
+  const handlePostCode = useCallback(
+    async (postcode) => {
+      try {
+        await setIsloading(true);
+        await setTimeout(async () => {
+          const { data } = await axios.get(
+            `https://viacep.com.br/ws/${postcode}/json/`
+          );
+          setDatapostcode({ uf: data.uf, city: data.localidade });
+          await setIsloading(false);
+        }, 1300);
+      } catch (err) {
+        await setIsloading(false);
+      }
+    },
+    [setIsloading, setDatapostcode]
+  );
+
+  console.log(isloading);
+
+  useEffect(() => {
+    if (postcode.length === 8) {
+      handlePostCode(postcode);
+    } else {
+      setDatapostcode(null);
+    }
+  }, [handlePostCode, postcode]);
 
   return (
     <div className="container">
@@ -31,8 +64,9 @@ function Checkout() {
                   inputOptions={{
                     type: "password",
                     name: "confirmPassword",
-                    required: true,
+                    autoComplete: "off",
                     value: "",
+                    onChange: undefined,
                     style: {
                       background: "#f7f7f7",
                     },
@@ -45,8 +79,9 @@ function Checkout() {
                   inputOptions={{
                     type: "password",
                     name: "confirmPassword",
-                    required: true,
+                    autoComplete: "off",
                     value: "",
+                    onChange: undefined,
                     style: {
                       background: "#f7f7f7",
                     },
@@ -61,6 +96,7 @@ function Checkout() {
                     type: "text",
                     name: "confirmPassword",
                     required: true,
+                    autoComplete: "off",
                     value: postcode,
                     onChange: (e) => {
                       setPostcode(
@@ -73,6 +109,32 @@ function Checkout() {
                   }}
                 />
               </div>
+              <div className="item postalcode">
+                {isloading && (
+                  <div class="spinner-container">
+                    <div class="spinner"></div>
+                  </div>
+                )}
+                {!isloading && datapostcode && (
+                  <div id="items-address">
+                    <div className="item-address">
+                      <span>Country</span>
+                      <p>Brasil</p>
+                    </div>
+                    <div className="item-address">
+                      <span>State</span>
+                      <p>{UF[datapostcode.uf]}</p>
+                    </div>
+                    <div className="item-address">
+                      <span>City</span>
+                      <p>{datapostcode.city}</p>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+            <div id="payment-method">
+              <h1>Payment method</h1>
             </div>
           </div>
           <div className="cart-sumary">
