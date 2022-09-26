@@ -1,12 +1,14 @@
-import React, { useCallback, useContext } from "react";
+import React, { useCallback, useContext, useState } from "react";
 import FormInput from "../../components/form-input/FormInput";
 import { CartContext } from "../../context/cart.context";
 import "./checkout.styles.scss";
 import { BsCart } from "react-icons/bs";
 import { Link } from "react-router-dom";
+import { validadeNumberInput } from "../../utils/validateNumberInput";
 
 function Checkout() {
   const { cartItems, setIsCartOpen } = useContext(CartContext);
+  const [postcode, setPostcode] = useState("");
 
   const handleSubTotal = useCallback(() => {
     let total = 0;
@@ -55,10 +57,16 @@ function Checkout() {
                 <FormInput
                   label="Zip / postal code"
                   inputOptions={{
-                    type: "password",
+                    maxLength: 8,
+                    type: "text",
                     name: "confirmPassword",
                     required: true,
-                    value: "",
+                    value: postcode,
+                    onChange: (e) => {
+                      setPostcode(
+                        validadeNumberInput(e.target.value, postcode)
+                      );
+                    },
                     style: {
                       background: "#f7f7f7",
                     },
